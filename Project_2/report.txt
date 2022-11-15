@@ -1,0 +1,60 @@
+a: The most notable obstacle I faced was trying figuring out a way to have as few nested if statements as possible.
+b:
+    // First check errors
+    Name: ""
+
+    Taxable income: -20
+
+    Occupation: ""
+
+    Number of children: -9
+
+    // Occupation tests
+
+    Name: Cyrus
+    Taxable income: 126000
+    Occupation: nurse
+    Number of children: 0
+
+    Name: Cyrus
+    Taxable income: 126000
+    Occupation: teacher
+    Number of children: 0
+
+    Name: Cyrus
+    Taxable income: 126000
+    Occupation: waiter
+    Number of children: 0
+
+    // Income greater than 125000
+
+    Name: Cyrus
+    Taxable income: 126000
+    Occupation: waiter
+    Number of children: 0
+
+    // Income less than 125000 but more than 55000
+
+    Name: Cyrus
+    Taxable income: 65000
+    Occupation: waiter
+    Number of children: 0
+
+    // Income less than or equal to 55000
+
+    Name: Cyrus
+    Taxable income: 45000
+    Occupation: waiter
+    Number of children: 0
+
+    // Children tests
+
+    Name: Cyrus
+    Taxable income: 45000
+    Occupation: waiter
+    Number of children: 1
+
+    Name: Cyrus
+    Taxable income: 45000
+    Occupation: waiter
+    Number of children: 25

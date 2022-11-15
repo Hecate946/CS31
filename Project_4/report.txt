@@ -1,0 +1,108 @@
+a) the most notable obstacle was trying to figure out the logic needed to make the split function work.
+I eventually resorted to sorting the entire array alphabetically, then going back and checking for the index of the splitter.
+I also struggled with the flip function, because I failed to quickly realize that a good way to implement this function would be to have two
+counters, one being decreased while the other increases.
+
+// Two string arrays to be used in testing all functions.
+const int n = 5;
+string names1[n] = {"isabella", "michael", "boris", "estrella", "john"};
+string names2[n] = {"isabella", "diego", "boris", "", "isabella"};
+
+b)
+
+appendToAll testing:
+
+int a = appendToAll(names2, -2, "!"); // n < 0, a = -1
+int b = appendToAll(names2, 4, "!"); // n >= 0, b = n, appends "!" to n elements.
+
+
+lookup testing:
+
+int a = lookup(names2, -2, "isabella"); // n < 0, a = -1
+int b = lookup(names2, 0, "isabella"); // n = 0, b = -1
+int c = lookup(names2, 3, "josh"); // target not in array, c = -1
+int d = lookup(names1, 3, "michael"); // one target in array, d = 1 (index of item)
+int e = lookup(names2, 5, "isabella"); // multiple targets in array, e = 0 (index of first item)
+
+
+positionOfMax testing:
+
+int a = positionOfMax(names2, -2); // n < 0, a = -1
+int b = positionOfMax(names2, 0); // n = 0, b = -1 (no interesting elements)
+int c = positionOfMax(names1 3); // one max in array (michael), c = 1
+int d = positionOfMax(names2, 5); // multiple max in array (isabella), d = 0 (index of first item)
+
+
+rotateLeft testing:
+
+int a = rotateLeft(names2, -2, 3); // n < 0, a = -1
+int b = rotateLeft(names2, 2, 2); // pos > n - 1, b = -1
+int c = rotateLeft(names2, 0, -1); // n = 0, pos must be zero or greater, thus invalid index. c = -1
+int d = rotateLeft(names1, 4, 2); // names1 = {"isabella", "michael", "estrella", "boris", "john"}; d = 2
+int e = rotateLeft(names2, 5, 1); // names2 = {"isabella", "boris", "", "isabella", "diego"}; e = 1
+
+countRuns testing:
+
+int a = countRuns(names2, -2); // n < 0, a = -1
+int b = countRuns(names2, 0); // n = 0, b = 0 (no runs found)
+int c = countRuns(names2, 2); // c = 2, two unique elements
+
+string names3[7] = {"isabella", "isabella", "blah", "isabella", "blah", "blah", "blah"};
+int d = countRuns(names3, 7); // d = 4;
+
+flip testing:
+
+int a = flip(names2, -2); // n < 0, a = -1
+int b = flip(names2, 0); // n = 0, b = 0 (no items to flip)
+int c = flip(names2, 5); // c = 5, reverse odd number of items, names2 = {"isabella", "", "boris", "diego", "isabella"}
+int d = flip(names1, 4); // d = 4, reverse even number of items, names1 = {"estrella", "boris", "michael", "isabella", "john"}
+
+differ testing:
+
+int a = differ(names2, -2, names1, 1); // n1 < 0, a = -1
+int b = differ(names2, 2, names1, -1); // n2 < 0, b = -1
+int c = differ(names2, 0, names1, 3); // n1 = 0, c = 0 (array names2 ran out)
+int d = differ(names2, 1, names1, 0); // n2 = 0, d = 0 (array names1 ran out)
+int e = differ(names2, 0, names1, 0); // n2 = 0, n1 = 0, e = 0 (both arrays ran out)
+int f= differ(names2, 5, names1, 3); // f = 1, first differing item is at index 1.
+string names4[2] = {"george", "george"};
+string names5[2] = {"george", "george"};
+int g = differ(names4, 2, names5, 2); // g = 2, n value gets returned
+
+subsequence testing:
+
+int a = subsequence(names2, -2, names1, 1); // n1 < 0, a = -1
+int b = subsequence(names2, 2, names1, -1); // n2 < 0, b = -1
+int c = subsequence(names2, 3, names1, 0); // n2 = 0, c = 0 (subsequence of any sequence)
+int d = subsequence(names2, 0, names1, 2); // n1 = 0, d = -1 (no items to subsequence)
+int e = subsequence(names2, 0, names1, 0); // n2 = 0, n1 = 0, e = 0 (again subseq of any seq)
+int f= subsequence(names2, 5, names1, 3); // f = -1, (no found subsequences)
+string names5[5] = {"hi", "george", "squirrel", "george", "monkey"};
+string names6[5] = {"hi", "george", "monkey", "george", "monkey"};
+string names7[5] = {"george", "monkey"};
+int g = subsequence(names5, 5, names7, 2); // g = 3, one subsequence, so return the subsequence starting index.
+int h = subsequence(names6, 5, names7, 2); // g = 1, multiple subsequences, so return the first subsequence starting index.
+int j = subsequence(names5, 2, names6, 3); // n2 > n1, return -1
+
+
+lookupAny testing:
+
+int a = lookupAny(names2, -2, names1, 1); // n1 < 0, a = -1
+int b = lookupAny(names2, 2, names1, -1); // n2 < 0, b = -1
+int c = lookupAny(names2, 3, names1, 0); // n2 = 0, c = -1 (no elems in n2, so can't have a match)
+int d = lookupAny(names2, 0, names1, 2); // n1 = 0, d = -1 (no elems in n1, so can't have a match)
+int e = lookupAny(names2, 0, names1, 0); // n2 = 0, n1 = 0, e = -1 (no elems so cant match)
+int f = lookupAny(names2, 5, names1, 3); // f = 0, (isabella is the first found lookup)
+string names8[5] = {"hi", "bye"};
+string names9[5] = {"george", "monkey"};
+int g = lookupAny(names8, 2, names9, 2); // g = -1, no found lookups
+
+split testing:
+
+
+int a = split(names2, -2, "isabella"); // n < 0, a = -1
+int b = split(names2, 0, "john"); // n = 0, b = 0 (no names to split, return n)
+int c = split(names1, 5, "l"); // one splitter, rearrange list to {"boris", "estrella", "isabella", "john, "michael"}, return 4
+int d = split(names2, 5, "e"); // rearrange array to {"", "boris", "diego", "isabella", "isabella"}, return 3;
+int e = split(names2, 5, "z"); // no need to rearrange, return n, e = 5
+int f = split(names1, 5, "a"); // no need to rearrange, return n, f = 0 (first element >= splitter)

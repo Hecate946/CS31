@@ -1,0 +1,42 @@
+original.cpp test 1:
+
+How many registered voters were surveyed? 10
+How many of them say they will vote for Gavin? 9
+How many of them say they will vote for Brian? 1
+
+90.0% say they will vote for Gavin.
+10.0% say they will vote for Brian.
+Gavin is predicted to win the election.
+
+This program functions as intended with no errors.
+It only produces odd results if nonsensical input is received, as in the following 2 tests:
+
+original.cpp test 2:
+
+How many registered voters were surveyed? 8
+How many of them say they will vote for Gavin? 21
+How many of them say they will vote for Brian? 3
+
+262.5% say they will vote for Gavin.
+37.5% say they will vote for Brian.
+Gavin is predicted to win the election.
+
+original.cpp test 3:
+
+How many registered voters were surveyed? hi
+How many of them say they will vote for Gavin? How many of them say they will vote for Brian?
+-inf% say they will vote for Gavin.
+inf% say they will vote for Brian.
+Brian is predicted to win the election.
+
+in logic_error.cpp, the program compiles successfully,
+but says that the candidate with more votes is predicted to win.
+This incorrect conclusion is caused by using the < instead of the > symbol
+to compare the votes of the candidates.
+
+in compile_error.cpp, the program does not compile due to two separate errors.
+Firstly, the integer variable "forGavin" was never defined, so cin >> forGavin,
+raises the error: 'forGavin' was not declared in this scope.
+
+secondly, a semicolon was forgotten at the end of the last statement,
+which resulted in a compilation syntax error.

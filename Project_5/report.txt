@@ -1,0 +1,63 @@
+a) One notable obstacle I faced during project 5 was not being able to debug why each
+guessed word would lose the first letter while being inputted. I finally realized that placing cin.ignore() inside
+the for loop, instead of right after taking the game round input, caused the issue. I also struggled with thinking of
+a way to make sure I don't count a single character as both a silver and a gold. I eventually settled on storing the
+index of the character in an array to solve that problem.
+
+b) 
+my program only has a main routine and a playOneRound function.
+The below pseudocode shows the design.
+main function:
+    make array to hold words
+    fill array with words using getWords()
+
+    if no words were loaded:
+        exit
+
+    get game rounds
+    if game rounds invalid:
+        exit
+    
+    set total number of tries to zero
+    
+    for the number of game rounds:
+        pick a random word from word array
+        tell user word length
+
+        get number of tries from playOneRound()
+        increment total tries
+        calculate maximum and minimum from tries
+        calculate average from total number of tries
+        output average, maximum, and minimum.
+
+playOneRound function:
+
+    set tries equal to zero
+    repeateadly until user guesses correct word:
+        initialize a cstring
+        get user input and store in cstring
+        check if user input is between 4 and 6 characters
+        check if user input is a known word
+        increment tries
+        if user guessed word correctly:
+            exit loop
+        
+        intialize golds and silvers counters to zero.
+        initialize a variable to store the index of a matching letter
+
+        create a new array to store the indexes of matching letters
+        search each letter in user inputted word
+            if letter is in hidden word:
+                if letter is in the correct position in hidden word:
+                    golds++
+                    if letter was already counted:
+                        silvers--
+                else:
+                    if letter was not already counted:
+                        silvers++
+                store index of letter inside index array to mark it as already used.
+
+            cout gold and silver counters
+        return tries
+        
+

@@ -1,0 +1,57 @@
+Some notable obstacles I faced was trying to figure out an efficient way to make
+the isValidPollString function works.
+I first tried to split the pollData string on the ',' character and struggled because
+there is no easy way to do this in c++. I eventually found a different way without the need
+for arrays.
+
+Program Design:
+
+Library include statements.
+
+stateCode function from spec modified to accept both upper and lowercase state codes.
+
+bool function to check if several consecutive party results are valid:
+    iterate through given party results
+        check if two numbers are followed by a party character
+        or if one number is followed by a party character
+        else: invalid.
+
+bool isValidPollString function:
+    while true:
+        if commas are in given string,
+            use up until comma and leave remainder in string.
+        else
+            no commas, only one forecast.
+            if string is empty, break.
+        check if state and party results are valid
+        if they are, return true. else false.
+        break when no characters are left in given string.
+
+countSeats function:
+    if party isn't character isn't valid return 2
+    if pollString is invalid return 1
+
+    declare variable to store seat count.
+    iterate through pollString and find all party characters
+        if party characters exist
+            find numbers that precede the party character
+            convert string numbers to integers
+            add integers to counter variable.
+
+main function used to output values for testing.
+
+EOF.
+
+Test data:
+
+Empty string: ""
+Comma as first char: ",NY9R16D1I,Vt,NJ3d5r4D,KS4R"
+Comma as last char: "NY9R16D1I,Vt,NJ3d5r4D,KS4R,"
+Whitespace character in string: "NY9R16D1I, Vt,NJ3d5r4D,KS4R"
+Whitespace character at end: "NY9R16D1I,Vt,NJ3d5r4D,KS4R "
+Whitespace character at beginning: " NY9R16D1I,Vt,NJ3d5r4D,KS4R"
+Invalid character: "NY9R16D1I,Vt,NJ3d5r.4D,KS4R"
+Invalid party: "NY9R16D1I,Vt,NJ3d5r4D,KS4RR"
+Invalid state code: "NN9R16D1I,Vt,NJ3d5r4D,KS4R"
+Invalid number of seats: "NN9R16D1I,Vt,NJ3d5r4D,KS444R"
+Valid poll string: "NY9R16D1I,Vt,NJ3d5r4D,KS4R"
