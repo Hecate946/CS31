@@ -1,0 +1,109 @@
+1.
+a)
+int main()
+{
+    int arr[3] = { 5, 10, 15 };
+    int* ptr = arr;
+
+    *ptr = 30;          // set arr[0] to 30
+    *(ptr + 1) = 20;      // set arr[1] to 20
+    arr[2] = 10;        // set arr[2] to 10
+
+    while (ptr <= (arr + 2))
+    {
+        cout << *ptr << endl;    // print values
+        ptr++;
+    }
+}
+
+b)
+The problem with the findMax function is that it never modifies the original ptr variable. Changing the parameter to a reference solves this issue.
+void findMax(int arr[], int n, int* &pToMax) // call pToMax as a reference to a pointer in order to modify the original value in main().
+{
+    if (n <= 0) 
+        return;      // no items, no maximum!
+        
+    pToMax = arr;
+
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[i] > *pToMax)
+            pToMax = arr + i;
+    }
+}       
+c)
+The current main routine does not work because the initialized pointer is not pointing to any specific memory location.
+This problem can be rectified by creating a new variable and setting the pointer equal to the reference of that varible.
+
+int main() {
+ 	int x; // initialize a variable
+	int* ptr = &x; // generate a pointer to x and set the pointer equal to that reference.
+    computeCube(5, ptr);
+    cout << "Five cubed is " << *ptr << endl;
+}
+
+d)
+The issue in this example was that the code was trying to compare two cstrings using the == and != operators.
+This is not correct, the below solution uses the * operator to access the character at the specific memory location indicated.
+*str returns the first character of the cstring as does *(&str[0]), until str++ advances to the next character.
+bool strequal(const char str1[], const char str2[])
+{
+    while (*str1 != 0  &&  *str2 != 0)  // change str1 and str2 to *str1 and *str2
+    {
+        if (*str1 != *str2)  // change str1 and str2 to *str1 and *str2
+            return false;
+        str1++;            // advance to the next character
+        str2++;
+    }
+    return (*str1 == *str2);   // change str1 and str2 to *str1 and *str2
+}
+
+e) the function nochange is taking in a pointer to an array as a parameter, then returning it.
+This is invalid because an array declared inside a function is not accessible outside that function,
+so when main() tries to access the values inside that array, wacky numbers appear.
+
+2
+a) double* cat;
+b) double mouse[5];
+c) cat = &mouse[4];
+d) *cat = 25;
+e) *(mouse + 3) = 54;
+f) cat -= 3;
+g) cat[1] = 42;
+h) cat[0] = 17;
+i) bool d = (*cat == mouse[0]);
+j) bool b = (*cat == *(cat + 1));
+
+3
+a)
+double mean(const double* scores, int numScores)
+{
+    double tot = 0;
+    int i = 0;
+    while (i != numScores)
+    {
+        tot += *(scores + i);
+        i++;
+    }
+    return tot/numScores;
+}
+
+b)
+const char* findTheChar(const char* str, char chr)
+{
+    for (int k = 0; *(str + k) != 0; k++)
+        if (*(str + k) == chr)
+            return (str + k);
+
+    return nullptr;
+}
+
+c)
+const char* findTheChar(const char* str, char chr)
+{
+    for (;*str != 0; str++)
+        if (*str == chr)
+            return str;
+
+    return nullptr;
+}
