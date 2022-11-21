@@ -107,3 +107,85 @@ const char* findTheChar(const char* str, char chr)
 
     return nullptr;
 }
+
+4
+
+FINAL OUTPUT:
+3
+4 
+79
+-1
+9
+22
+19
+
+CODE + REASONING:
+#include <iostream>
+using namespace std;
+
+
+// given two pointers, this function returns whichever pointer points to a greater value.
+int* maxwell(int* a, int* b)
+{
+    if (*a > *b)
+        return a;
+    else
+        return b;
+}
+
+// this function pointer a point to b, and pointer b point to a.
+void swap1(int* a, int* b)
+{
+    int* temp = a;
+    a = b;
+    b = temp;
+}
+
+void swap2(int* a, int* b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main()
+{
+    int array[6] = { 5, 3, 4, 17, 22, 19 };
+
+    int* ptr = maxwell(array, &array[2]); // returns a pointer to array[0], because 5 is greater than 4 (*(array) > *(&array[2]))
+    //cout << *ptr << endl;
+    *ptr = -1; // *ptr pointed to array[0], which was equal to 5. Now array[0] is equal to -1.
+    ptr += 2; // move the pointer ahead 2 spaces, so now the pointer points to array[2], which is 4
+    ptr[1] = 9; // pointer is currently 2, ptr[1] points to array[2+1]. array[3] was 17, but it is now 9.
+    *(array+1) = 79; // array[1] is now 79.
+
+    // current array: {-1, 79, 4, 9, 22, 19}
+    // pointer is currently 2
+
+    cout << &array[5] - ptr << endl; // ptr currently points to array[2], so ptr is equal to &array[2].
+    // there are 3 memory locations between &array[5] and &array[2], so &array[5] - &array[2] equals 3.
+
+    // FIRST LINE OF OUTPUT IS 3
+
+    swap1(&array[0], &array[1]); // this generates two pointers, one to array[0] and one to array[1], but no values of array are changed inside swap1()
+    swap2(array, &array[2]); // this sets the value inside array[0] to array[2], and the value inside array[2] to array[0].
+    // array was: {-1, 79, 4, 9, 22, 19}
+    // array now is: {4, 79, -1, 9, 22, 19}
+
+
+    for (int i = 0; i < 6; i++)
+        cout << array[i] << endl;// cout 4, then 79, then -1, then 9, then 22, then 19.
+}
+
+5
+void removeS(char* cstring) {
+    char* ptr = cstring;
+    while (*cstring != 0) {
+        if (*cstring != 's' && *cstring != 'S') {
+            *ptr = *cstring;
+            ptr++;
+        }
+        cstring++;
+    *ptr = 0;
+    }
+}
