@@ -71,7 +71,7 @@ e) *(mouse + 3) = 54;
 f) cat -= 3;
 g) cat[1] = 42;
 h) cat[0] = 17;
-i) bool d = (*cat == mouse[0]);
+i) bool d = (cat == mouse);
 j) bool b = (*cat == *(cat + 1));
 
 3
